@@ -1,8 +1,11 @@
 {
-  "name": "cra-gestalt",
+  "name": "cra-mauerwerk",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "3.8.0",
+    "lodash": "4.17.10",
+    "mauerwerk": "^2.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.4"
