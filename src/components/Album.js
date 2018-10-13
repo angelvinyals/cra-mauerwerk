@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Grid } from 'mauerwerk'
+import lodash from 'lodash'
 import data from './data'
 import Cell from './Cell'
+import Header from './Header'
 
 class Album extends Component {
   state = { data, columns: 3, margin: 0, filter: '', height: true }
+  search = e => this.setState({ filter: e.target.value })
+  shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
+  setColumns = e => this.setState({ columns: parseInt(e.key) })
+  setMargin = e => this.setState({ margin: parseInt(e.key) })
+  setHeight = e => this.setState({ height: e })
   render() {
+    const data = this.state.data.filter(
+      d => d.name.toLowerCase().indexOf(this.state.filter) !== -1
+    )
     return (
-      
+      <div className="main">
+        <Header
+          {...this.state}
+          search={this.search}
+          shuffle={this.shuffle}
+          setColumns={this.setColumns}
+          setMargin={this.setMargin}
+          setHeight={this.setHeight}
+        />      
         <Grid
           className="Album"
           // Arbitrary data, should contain keys, possibly heights, etc.
@@ -31,9 +49,8 @@ class Album extends Component {
             <Cell {...data} maximized={maximized} toggle={toggle} />
           )}
         </Grid>
-       
-     
-    );
+      </div>     
+    )
   }
 }
 
